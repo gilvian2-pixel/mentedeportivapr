@@ -370,6 +370,15 @@ textarea{resize:vertical;min-height:96px}
 .row-dd-item.danger{color:#DC2626}
 .row-dd-item.danger:hover{background:#FEF2F2}
 
+
+.review-admin-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .2s}
+.review-admin-card:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(21,128,61,0.08)}
+.review-admin-stars{font-size:1.1rem;margin-bottom:10px}
+.review-admin-text{font-size:.88rem;color:var(--text-2);line-height:1.6;font-style:italic;margin-bottom:12px}
+.review-admin-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;color:var(--green-dark)}
+.review-admin-athlete{font-size:.74rem;color:var(--muted);margin-top:2px}
+.review-empty{text-align:center;padding:32px;color:var(--muted);font-size:.88rem;grid-column:1/-1;background:var(--white);border:1px solid var(--border);border-radius:14px}
+
 /* FOOTER */
 footer{background:var(--text);padding:44px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
 .footer-logo img{height:34px;width:auto;filter:brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(80deg)}
@@ -1411,6 +1420,7 @@ function showAdminHome() {
   if (homeView) homeView.style.display = 'block';
   if (managerView) managerView.style.display = 'none';
   loadAdminCards();
+  loadAdminReviews();
 }
 
 function showAdminAthleteManager() {
@@ -1772,6 +1782,7 @@ async function createNewAthlete() {
 
     // Refresh athlete list
     loadAdminCards();
+  loadAdminReviews();
 
   } catch(e) {
     const msgs = {
@@ -1877,6 +1888,7 @@ async function deleteAthlete(uid, name) {
     // Reload list
     loadAthleteList();
     loadAdminCards();
+  loadAdminReviews();
   } catch(e) {
     alert('Error al eliminar: ' + e.message + '\n\nPuedes eliminarlo manualmente desde Firebase Console.');
   }
@@ -1937,6 +1949,49 @@ async function doReset() {
     msg.style.color = '#DC2626';
     msg.style.display = 'block';
     btn.textContent = 'Enviar enlace →'; btn.disabled = false;
+  }
+}
+
+
+// ══ ADMIN REVIEWS ══
+async function loadAdminReviews() {
+  const grid = document.getElementById('admin-reviews-grid');
+  if (!grid) return;
+  grid.innerHTML = '<div class="admin-loading">Cargando reseñas...</div>';
+  
+  try {
+    const snap = await db.collection('users').orderBy('name').get();
+    const reviews = [];
+    
+    for (const doc of snap.docs) {
+      const u = doc.data();
+      if (u.email === ADMIN_EMAIL) continue;
+      try {
+        const reviewDoc = await db.collection('users').doc(doc.id).collection('review').doc('main').get();
+        if (reviewDoc.exists) {
+          reviews.push({ athlete: u.name, sport: u.sport || '', ...reviewDoc.data() });
+        }
+      } catch(e) {}
+    }
+
+    if (!reviews.length) {
+      grid.innerHTML = '<div class="review-empty">Aún no hay reseñas. Aparecerán aquí cuando los atletas completen su experiencia.</div>';
+      return;
+    }
+
+    grid.innerHTML = '';
+    reviews.forEach(r => {
+      const stars = '⭐'.repeat(r.stars || 0);
+      grid.innerHTML += `
+        <div class="review-admin-card">
+          <div class="review-admin-stars">${stars}</div>
+          <div class="review-admin-text">"${r.text || ''}"</div>
+          <div class="review-admin-name">— ${r.displayName || ''}</div>
+          <div class="review-admin-athlete">${r.athlete || ''} · ${r.sport || ''}</div>
+        </div>`;
+    });
+  } catch(e) {
+    grid.innerHTML = `<div class="review-empty" style="color:#DC2626">Error cargando reseñas: ${e.message}</div>`;
   }
 }
 
