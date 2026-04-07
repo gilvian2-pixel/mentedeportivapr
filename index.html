@@ -735,7 +735,7 @@ footer{background:var(--text);padding:44px 64px;display:flex;align-items:center;
           <div class="admin-card">
             <h3>📝 Agregar nota de sesión</h3>
             <div class="admin-form-grid">
-              <div class="admin-fg"><label>Fecha de la sesión</label><input id="admin-note-date" type="date"/></div>
+              <div class="admin-fg"><label>Fecha de la sesión <span style="color:#DC2626">*</span></label><input id="admin-note-date" type="date" required style="border-color:var(--green-dark)"/></div>
               <div class="admin-fg"><label>Etiqueta</label>
                 <select id="admin-note-tag">
                   <option>Evaluación</option><option>Rutinas</option><option>Enfoque</option>
@@ -1589,19 +1589,15 @@ async function addAdminNote() {
   const tag=document.getElementById('admin-note-tag').value;
   const sessionDateVal = document.getElementById('admin-note-date').value;
   
-  // Format session date for display
-  let sessionDate = '';
-  let sessionDateDisplay = '';
-  if (sessionDateVal) {
-    sessionDate = sessionDateVal;
-    const d = new Date(sessionDateVal + 'T12:00:00');
-    sessionDateDisplay = d.toLocaleDateString('es-PR', {day:'numeric', month:'short', year:'numeric'});
-  } else {
-    // Default to today if no date selected
-    const today = new Date();
-    sessionDate = today.toISOString().split('T')[0];
-    sessionDateDisplay = today.toLocaleDateString('es-PR', {day:'numeric', month:'short', year:'numeric'});
+  // Require session date
+  if (!sessionDateVal) {
+    alert('Por favor selecciona la fecha de la sesión.');
+    document.getElementById('admin-note-date').focus();
+    return;
   }
+  const sessionDate = sessionDateVal;
+  const d = new Date(sessionDateVal + 'T12:00:00');
+  const sessionDateDisplay = d.toLocaleDateString('es-PR', {day:'numeric', month:'short', year:'numeric'});
 
   await db.collection('users').doc(uid).collection('notes').add({
     text, tag, addedBy:'gilvian',
