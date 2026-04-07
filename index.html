@@ -1578,7 +1578,8 @@ async function loadAdminNotes(uid) {
   const c=document.getElementById('admin-notes-list'); c.innerHTML='';
   if(snap.empty){c.innerHTML='<div class="admin-empty">Sin notas aún.</div>';return;}
   snap.docs.forEach(d=>{
-    const n=d.data(); const date=n.createdAt?.toDate?n.createdAt.toDate().toLocaleDateString('es-PR',{day:'numeric',month:'short',year:'numeric'}):'';
+    const n=d.data();
+    const date = n.sessionDateDisplay || (n.createdAt?.toDate ? n.createdAt.toDate().toLocaleDateString('es-PR',{day:'numeric',month:'short',year:'numeric'}) : '');
     c.innerHTML+=`<div class="note-admin-item"><div class="note-admin-left"><div class="note-admin-date">${date} · ${n.tag||'Nota'} · ${n.addedBy==='gilvian'?'Por Gilvian':'Por atleta'}</div><div class="note-admin-text">${n.text}</div></div><button class="btn-danger-sm" onclick="deleteNote('${d.id}','${uid}')">Eliminar</button></div>`;
   });
 }
