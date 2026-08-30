@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía para Padres — Mente Deportiva PR</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:       #22C55E;
+  --green-dark:  #15803D;
+  --green-deep:  #0F4C25;
+  --green-pale:  #F0FDF4;
+  --green-light: #DCFCE7;
+  --ink:         #111827;
+  --body:        #374151;
+  --mid:         #6B7280;
+  --bg:          #F3F4F6;
+  --border:      #D1D5DB;
+  --white:       #FFFFFF;
+  --r-card:      14px;
+  --r-pill:      999px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ───────────────────────────────────── */
+nav {
+  background: var(--green-deep);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--green);
+}
+.nav-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: .95rem;
+  color: var(--white);
+  letter-spacing: .04em;
+  text-decoration: none;
+}
+.nav-brand span { color: var(--green); }
+.nav-tag {
+  font-size: .72rem;
+  color: #86EFAC;
+  font-weight: 500;
+  letter-spacing: .05em;
+}
+
+/* ── HERO ──────────────────────────────────── */
+.hero {
+  background: var(--green-deep);
+  padding: 5rem 1.5rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 560px; height: 560px;
+  border-radius: 50%;
+  background: rgba(34,197,94,.06);
+  top: -180px; right: -140px;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: rgba(34,197,94,.05);
+  bottom: -100px; left: -80px;
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-block;
+  background: var(--green);
+  color: var(--green-deep);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .32rem 1rem;
+  border-radius: var(--r-pill);
+  margin-bottom: 1.4rem;
+}
+.hero h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  color: var(--white);
+  line-height: 1.15;
+  max-width: 680px;
+  margin: 0 auto .75rem;
+}
+.hero h1 em { font-style: normal; color: var(--green); }
+.hero-sub {
+  color: #86EFAC;
+  font-size: 1.02rem;
+  max-width: 540px;
+  margin: 0 auto 2.4rem;
+}
+.hero-badges {
+  display: flex;
+  gap: .65rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.4rem;
+}
+.badge {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  color: var(--white);
+  font-size: .75rem;
+  font-weight: 500;
+  padding: .38rem .85rem;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.badge strong { color: var(--green); }
+.hero-line {
+  width: 56px; height: 3px;
+  background: var(--green);
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* ── SECTION HEAD ──────────────────────────── */
+.sec-head {
+  text-align: center;
+  padding: 3.5rem 1.5rem 1rem;
+}
+.sec-head h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.55rem;
+  color: var(--ink);
+}
+.sec-head p { color: var(--mid); font-size: .93rem; margin-top: .4rem; }
+
+/* ── GRID ──────────────────────────────────── */
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(318px, 1fr));
+  gap: 1.4rem;
+}
+
+/* ── CARD ──────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--r-card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.card:hover {
+  box-shadow: 0 10px 36px rgba(15,76,37,.13);
+  transform: translateY(-3px);
+}
+
+/* card header */
+.card-hd {
+  background: var(--green-deep);
+  padding: 1.2rem 1.4rem 1.2rem 1.6rem;
+  position: relative;
+}
+.card-hd::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--green);
+}
+.card-num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: .64rem;
+  letter-spacing: .12em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: .3rem;
+}
+.card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: .28rem;
+}
+.card-sub {
+  font-size: .76rem;
+  color: #86EFAC;
+  font-style: italic;
+}
+
+/* card body */
+.card-bd {
+  padding: 1.2rem 1.4rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.card-hook {
+  font-size: .93rem;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.55;
+  font-style: italic;
+  border-left: 3px solid var(--green);
+  padding-left: .7rem;
+}
+.card-abstract {
+  font-size: .86rem;
+  color: var(--body);
+  line-height: 1.72;
+}
+.card-tags-label {
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  margin-top: .2rem;
+}
+.tags { display: flex; flex-wrap: wrap; gap: .36rem; }
+.tag {
+  background: var(--green-pale);
+  border: 1px solid var(--green-light);
+  color: var(--green-dark);
+  font-size: .7rem;
+  font-weight: 500;
+  padding: .26rem .6rem;
+  border-radius: var(--r-pill);
+}
+
+/* cta */
+.card-cta {
+  margin-top: auto;
+  padding-top: .9rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+.price-hint { font-size: .76rem; color: var(--mid); }
+.btn-buy {
+  background: var(--green-dark);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .76rem;
+  letter-spacing: .04em;
+  padding: .52rem 1.1rem;
+  border-radius: var(--r-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .38rem;
+  white-space: nowrap;
+  transition: background .15s, transform .15s;
+}
+.btn-buy:hover { background: var(--green); color: var(--green-deep); transform: scale(1.03); }
+.btn-buy svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* ── BANNER ────────────────────────────────── */
+.banner {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  padding: 0 1.25rem;
+}
+.banner-inner {
+  background: var(--green-deep);
+  border-radius: var(--r-card);
+  border: 1px solid rgba(34,197,94,.28);
+  padding: 2.4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.banner-inner h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--white);
+  margin-bottom: .35rem;
+}
+.banner-inner p { color: #86EFAC; font-size: .86rem; max-width: 480px; }
+.btn-full {
+  background: var(--green);
+  color: var(--green-deep);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: .88rem;
+  padding: .78rem 1.7rem;
+  border-radius: var(--r-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background .15s, transform .15s;
+}
+.btn-full:hover { background: #DCFCE7; transform: scale(1.03); }
+
+/* ── FOOTER ────────────────────────────────── */
+footer {
+  background: var(--green-deep);
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 3px solid var(--green);
+}
+footer p { color: #86EFAC; font-size: .8rem; line-height: 1.8; }
+footer strong { color: var(--white); }
+
+@media (max-width: 600px) {
+  .hero { padding: 3.5rem 1.25rem 3rem; }
+  .grid { padding: 1rem 1rem 3rem; }
+  .banner { padding: 0 1rem; }
+  .banner-inner { padding: 1.8rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#"><span>MENTE</span> DEPORTIVA PR</a>
+  <span class="nav-tag">Guía para Padres · 8 Capítulos</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Guía para Padres · 8 Capítulos</div>
+  <h1>Acompaña a tu hijo atleta <em>sin presionar,</em><br>sin alejarte, sin perder el disfrute</h1>
+  <p class="hero-sub">Cada capítulo es una guía diseñada para el padre que busca acompañar a sus hijos desde su mejor versión.</p>
+  <div class="hero-line"></div>
+</section>
+
+<!-- SECTION HEAD -->
+<div class="sec-head">
+  <h2>Elige el capítulo que necesitas hoy</h2>
+  <p>Cada uno se puede leer de forma independiente o como parte de la guía completa.</p>
+</div>
+
+<!-- CARDS GRID -->
+<div class="grid">
+
+  <!-- CAP 1 -->
+  <article class="card">
+    <div class="card-hd">
+      <div class="card-num">Capítulo 1</div>
+      <h2 class="card-title">El rol fundamental de los padres en el deporte base</h2>
+      <div class="card-sub">El triángulo del éxito: atleta, entrenador y familia</div>
+    </div>
+    <div class="card-bd">
+      <p class="card-hook">"No depende solo del talento del niño ni de la habilidad del entrenador. Depende, en igual o mayor medida, del entorno que construyen las familias."</p>
+      <p class="card-abstract">¿Sabías que el 86% de los atletas que permanecen en el deporte tienen padres que los animan incondicionalmente, frente al 58% de quienes abandonaron? Este capítulo explora la diferencia entre el apoyo que da alas y la presión que paraliza y por qué esa diferencia se juega en casa, no en la cancha. Descubrirás el modelo del Triángulo del Éxito, el Quality Parenting Framework aplicado al deporte juvenil, y las señales tempranas del burnout que los padres raramente reconocen hasta que ya es tarde.</p>
+      <div>
+        <div class="card-tags-label">Incluye</div>
+        <div class="tags">
+          <span class="tag">El síndrome de la presión invisible</span>
+          <span class="tag">Señales de burnout temprano</span>
+          <span class="tag">Tabla Haz esto / Evita esto</span>
+          <span class="tag">Test: evalúa tu estilo de apoyo</span>
+          <span class="tag">5 perfiles parentales</span>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="price-hint">Capítulo individual</span>
+        <a class="btn-buy" href="#">Adquirir capítulo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CAP 2 -->
+  <article class="card">
+    <div class="card-hd">
+      <div class="card-num">Capítulo 2</div>
+      <h2 class="card-title">Las preguntas correctas</h2>
+      <div class="card-sub">El arte de conversar con tu hijo deportista</div>
+    </div>
+    <div class="card-bd">
+      <p class="card-hook">"Los atletas jóvenes describen el trayecto en coche después del partido como el momento más tenso de su relación con sus padres. No el partido. El viaje de vuelta."</p>
+      <p class="card-abstract">¿Por qué tu hijo responde con monosílabos cuando le preguntas cómo le fue? Porque el cerebro adolescente procesa las preguntas emocionalmente antes que racionalmente y la estructura de la pregunta lo abre o lo cierra antes de que piense en responder. Este capítulo explica la ciencia del porqué, te da 15 preguntas organizadas por situación y te enseña cuándo el silencio es más poderoso que cualquier pregunta.</p>
+      <div>
+        <div class="card-tags-label">Incluye</div>
+        <div class="tags">
+          <span class="tag">15 preguntas que abren mundos</span>
+          <span class="tag">La regla de las 24 horas (AASP)</span>
+          <span class="tag">10 pares Pregunta esto / Evita esto</span>
+          <span class="tag">Test: ¿qué tipo de preguntador eres?</span>
+          <span class="tag">4 perfiles comunicativos</span>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="price-hint">Capítulo individual</span>
+        <a class="btn-buy" href="#">Adquirir capítulo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CAP 3 -->
+  <article class="card">
+    <div class="card-hd">
+      <div class="card-num">Capítulo 3</div>
+      <h2 class="card-title">Cómo apoyar en las prácticas</h2>
+      <div class="card-sub">El arte de estar presente sin interferir</div>
+    </div>
+    <div class="card-bd">
+      <p class="card-hook">"Tu hijo no solo te observa cuando crees que lo hace. Te observa siempre. Y cada gesto, cada suspiro, cada cruce de brazos es un dato que su cerebro procesa y almacena."</p>
+      <p class="card-abstract">El entrenamiento es el espacio más sagrado del desarrollo deportivo y también donde la presencia parental requiere mayor consciencia. Este capítulo describe los cuatro tipos de padre en la banda, explica por qué el lenguaje corporal del padre afecta la concentración y la relación del atleta con su entrenador, y muestra cómo la puntualidad, la nutrición y la gestión del calendario son actos de amor tan poderosos como cualquier conversación.</p>
+      <div>
+        <div class="card-tags-label">Incluye</div>
+        <div class="tags">
+          <span class="tag">4 perfiles de padre en la banda</span>
+          <span class="tag">Historia real: Andrea y Carlos</span>
+          <span class="tag">10 pares Haz esto / Evita esto</span>
+          <span class="tag">Test de estilo de apoyo en prácticas</span>
+          <span class="tag">Apoyo logístico basado en evidencia</span>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="price-hint">Capítulo individual</span>
+        <a class="btn-buy" href="#">Adquirir capítulo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CAP 4 -->
+  <article class="card">
+    <div class="card-hd">
+      <div class="card-num">Capítulo 4</div>
+      <h2 class="card-title">Balance estudios y deporte</h2>
+      <div class="card-sub">Cómo criar un atleta que también es un gran estudiante</div>
+    </div>
+    <div class="card-bd">
+      <p class="card-hook">"El conflicto real no es entre estudios y deporte. Es entre el caos y la organización. Las familias que lo logran no tienen más horas — tienen mejor sistema."</p>
+      <p class="card-abstract">La ciencia lo confirma: los atletas obtienen mejores calificaciones, menos ausentismo y mayores tasas de graduación que sus pares no deportistas. Pero solo cuando el balance se gestiona con inteligencia familiar. Este capítulo explica el rol del BDNF (proteína del cerebro que el ejercicio activa), el impacto del sueño en el rendimiento dual, las señales de alarma en cuatro áreas, y las herramientas concretas: la semana tipo, los bloques de estudio estratégico y la planificación conjunta que transforman el caos en predecibilidad.</p>
+      <div>
+        <div class="card-tags-label">Incluye</div>
+        <div class="tags">
+          <span class="tag">Neurociencia del ejercicio y aprendizaje</span>
+          <span class="tag">La semana tipo visual (7 días)</span>
+          <span class="tag">Historia: Sofía vs. Camila</span>
+          <span class="tag">10 pares Haz esto / Evita esto</span>
+          <span class="tag">Test: ¿cómo gestionas el balance?</span>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="price-hint">Capítulo individual</span>
+        <a class="btn-buy" href="#">Adquirir capítulo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CAP 5 -->
+  <article class="card">
+    <div class="card-hd">
+      <div class="card-num">Capítulo 5</div>
+      <h2 class="card-title">Manejo del error</h2>
+      <div class="card-sub">Cómo convertir los fallos en el combustible del crecimiento</div>
+    </div>
+    <div class="card-bd">
+      <p class="card-hook">"Los niños no temen equivocarse de forma innata. El miedo al error se aprende — y se aprende, en gran medida, de cómo reaccionan los adultos más cercanos cuando fallan."</p>
+      <p class="card-abstract">Haimovitz y Dweck demostraron que lo que más predice la mentalidad de crecimiento de un hijo no es lo que los padres dicen sobre la inteligencia, sino lo que hacen cuando su hijo falla. Este capítulo explica la neurociencia del error, describe los tres perfiles parentales con diálogos reales que puedes reconocer, y ofrece el Protocolo de los 10 Minutos: una guía paso a paso de qué hacer y decir en el momento más difícil.</p>
+      <div>
+        <div class="card-tags-label">Incluye</div>
+        <div class="tags">
+          <span class="tag">Biología del error (amígdala y cortisol)</span>
+          <span class="tag">3 perfiles con diálogos reales</span>
+          <span class="tag">Protocolo de los 10 minutos</span>
+          <span class="tag">12 pares Di esto / Evita decir esto</span>
+          <span class="tag">Mateo y Diego: el mismo error, dos caminos</span>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="price-hint">Capítulo individual</span>
+        <a class="btn-buy" href="#">Adquirir capítulo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CAP 6 -->
+  <article class="card">
+    <div class="card-hd">
+      <div class="card-num">Capítulo 6</div>
+      <h2 class="card-title">Presión y amor al deporte</h2>
+      <div class="card-sub">Cómo mantener viva la llama sin apagarla con expectativas</div>
+    </div>
+    <div class="card-bd">
+      <p class="card-hook">"Los padres que más aman el deporte de sus hijos son, con frecuencia, los que más riesgo corren de apagar exactamente lo que más quieren proteger: las ganas de seguir jugando."</p>
+      <p class="card-abstract">Basado en la Teoría de la Autodeterminación de Deci y Ryan, este capítulo explica la diferencia entre un atleta que juega porque lo ama y uno que juega para no decepcionar a sus padres — y por qué ese segundo tipo de atleta abandona el deporte exactamente cuando más éxito tiene. Analiza cinco patrones de presión invisible y ofrece cinco estrategias concretas para reconectar al atleta con su amor genuino al deporte.</p>
+      <div>
+        <div class="card-tags-label">Incluye</div>
+        <div class="tags">
+          <span class="tag">El continuo de la motivación (visual)</span>
+          <span class="tag">5 patrones de presión invisible</span>
+          <span class="tag">Historia de Luis y su madre</span>
+          <span class="tag">10 pares Apoya / Destruye la motivación</span>
+          <span class="tag">Test: ¿alimentas o apaga la llama?</span>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="price-hint">Capítulo individual</span>
+        <a class="btn-buy" href="#">Adquirir capítulo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CAP 7 -->
+  <article class="card">
+    <div class="card-hd">
+      <div class="card-num">Capítulo 7</div>
+      <h2 class="card-title">Conversaciones difíciles</h2>
+      <div class="card-sub">Cómo hablar sobre lo que nadie quiere decir en voz alta</div>
+    </div>
+    <div class="card-bd">
+      <p class="card-hook">"Las conversaciones que se evitan no desaparecen. Se acumulan. Se convierten en la distancia emocional que el padre empieza a sentir sin entender por qué."</p>
+      <p class="card-abstract">Basado en la Comunicación No Violenta de Rosenberg y el modelo de Conversaciones Cruciales, este capítulo ofrece el mapa completo de las cinco conversaciones más evitadas en familias deportistas: querer dejar el deporte, conflicto con el entrenador, frustración por no jugar, miedo a decepcionar y querer cambiar de equipo. Para cada una: el contexto emocional, los errores más frecuentes y una guía práctica. Incluye el Protocolo de 7 Pasos para preparar, sostener y cerrar cualquier conversación difícil.</p>
+      <div>
+        <div class="card-tags-label">Incluye</div>
+        <div class="tags">
+          <span class="tag">Mapa de las 5 conversaciones más evitadas</span>
+          <span class="tag">Protocolo de 7 pasos</span>
+          <span class="tag">Adrián vs. Pablo: el mismo anuncio</span>
+          <span class="tag">12 pares Di esto / Evita decir esto</span>
+          <span class="tag">Cuándo buscar apoyo profesional</span>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="price-hint">Capítulo individual</span>
+        <a class="btn-buy" href="#">Adquirir capítulo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CAP 8 -->
+  <article class="card">
+    <div class="card-hd">
+      <div class="card-num">Capítulo 8</div>
+      <h2 class="card-title">Tu bienestar también importa</h2>
+      <div class="card-sub">El padre o madre que se cuida es el mejor apoyo que puede dar</div>
+    </div>
+    <div class="card-bd">
+      <p class="card-hook">"Cuando los padres exhiben ansiedad de rendimiento no gestionada, sus hijos tienen hasta un 50% más de probabilidad de burnout deportivo y de abandonar el deporte."</p>
+      <p class="card-abstract">Este es el capítulo que nadie espera en una guía de deporte — y el que más padres necesitan. Analiza el síndrome del padre satélite (cuando tu vida orbita la de tu atleta), las emociones que nadie nombra en las gradas, el coste real del agotamiento parental en el atleta, y seis áreas concretas de autocuidado aplicadas específicamente al padre de atleta. Porque el padre agotado no puede dar lo que no tiene.</p>
+      <div>
+        <div class="card-tags-label">Incluye</div>
+        <div class="tags">
+          <span class="tag">Síndrome del padre satélite</span>
+          <span class="tag">Las 3 emociones de la grada</span>
+          <span class="tag">Historia: Elena y el partido que ella también jugó</span>
+          <span class="tag">6 áreas de autocuidado parental</span>
+          <span class="tag">10 pares Cuídate / Evita estos patrones</span>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="price-hint">Capítulo individual</span>
+        <a class="btn-buy" href="#">Adquirir capítulo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- FULL GUIDE BANNER -->
+<div class="banner">
+  <div class="banner-inner">
+    <div>
+      <h3>Guía Completa — Los 8 Capítulos</h3>
+      <p>Todos los capítulos en un solo documento. La guía más completa sobre acompañamiento parental en el deporte juvenil disponible en español.</p>
+    </div>
+    <a class="btn-full" href="#">Adquirir guía completa</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Mente Deportiva PR</strong> · Gilvian Díaz Arroyo</p>
+  <p>939.940.1393 · gilvian2@gmail.com · @mentedeportivapr</p>
+  <p style="margin-top:.3rem; font-size:.73rem; color:rgba(134,239,172,.55);">Entrenamiento mental aplicado al deporte · Puerto Rico</p>
+</footer>
+
+</body>
+</html>
